@@ -30,7 +30,7 @@ def render_plant(plant):
     rows = []
     for activity in CARE_ACTIVITIES:
         base_value, unit = get_activity_schedule(plant, activity)
-        adjusted_value = adjust_frequency_for_season(activity, base_value, unit, plant_type, current_season)
+        adjusted_value = adjust_frequency_for_season(activity, base_value, plant_type, current_season)
         rows.append({
             "Activity": activity.title(),
             "Base interval": f"{base_value} {unit}",

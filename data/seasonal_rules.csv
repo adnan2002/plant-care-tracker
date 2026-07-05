@@ -1,0 +1,26 @@
+rule_id,plant_type,season,activity,multiplier,reminder
+1,any,winter,watering,1.2,Reduce watering during winter.
+2,cacti,winter,watering,1.5,Let the soil dry fully between waterings.
+3,cactus,winter,watering,1.5,Let the soil dry fully between waterings.
+4,fern,summer,watering,0.9,Check moisture more often during hot spells.
+5,tropical,summer,watering,0.9,Check moisture more often during hot spells.
+6,any,winter,fertilizing,2.0,Reduce fertilizing and watch for slower growth.
+7,flowering,spring,fertilizing,0.75,Resume active feeding as growth picks up.
+8,flowering,summer,fertilizing,0.75,Resume active feeding as growth picks up.
+9,tropical,spring,fertilizing,0.75,Resume active feeding as growth picks up.
+10,tropical,summer,fertilizing,0.75,Resume active feeding as growth picks up.
+11,herb,spring,fertilizing,0.75,Resume active feeding as growth picks up.
+12,herb,summer,fertilizing,0.75,Resume active feeding as growth picks up.
+13,any,autumn,,,"Prepare for slower growth and reduce feeding gradually."
+14,any,winter,,,"Reduce fertilizing and watch for slower growth."
+15,fern,winter,,,"Increase humidity with a tray or humidifier."
+16,tropical,winter,,,"Increase humidity with a tray or humidifier."
+17,cacti,winter,,,"Let the soil dry fully between waterings."
+18,cactus,winter,,,"Let the soil dry fully between waterings."
+19,fern,summer,,,"Watch for heat stress and keep humidity stable."
+20,tropical,summer,,,"Watch for heat stress and keep humidity stable."
+21,any,spring,,,"Resume active feeding as growth picks up."
+22,flowering,spring,,,"Support new blooms or foliage with steady light and water."
+23,herb,spring,,,"Support new blooms or foliage with steady light and water."
+24,any,summer,,,"Check moisture more often during hot spells."
+25,any,autumn,,,"Prepare for slower growth and reduce feeding gradually."

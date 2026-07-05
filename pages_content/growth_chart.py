@@ -42,18 +42,16 @@ if chart_df.empty:
 chart_df["date"] = pd.to_datetime(chart_df["date"])
 chart_df["plant_name"] = chart_df["plant_id"].map(id_to_name)
 
-height_chart = (
-    chart_df.pivot_table(index="date", columns="plant_name", values="height_cm", aggfunc="last")
-    .sort_index()
-)
+height_chart = chart_df.pivot_table(index="date", columns="plant_name", values="height_cm", aggfunc="last").sort_index()
 
-width_chart = (
-    chart_df.pivot_table(index="date", columns="plant_name", values="width_cm", aggfunc="last")
-    .sort_index()
-)
+width_chart = chart_df.pivot_table(index="date", columns="plant_name", values="width_cm", aggfunc="last").sort_index()
 
 st.caption("Each line represents a selected plant.")
+
 st.markdown("**Height (cm)**")
+
 st.line_chart(height_chart)
+
 st.markdown("**Width (cm)**")
+
 st.line_chart(width_chart)

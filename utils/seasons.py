@@ -1,5 +1,74 @@
 from datetime import date as date_type
 from math import ceil
+import pandas as pd
+
+SEASONAL_RULES_CSV = "data/seasonal_rules.csv"
+
+
+def normalize(value):
+    if value is None:
+        value = ""
+    return str(value).strip().lower()
+
+
+def clean_reminder(value):
+    if value is None:
+        value = ""
+    return str(value).strip()
+
+
+def load_rules():
+    if not SEASONAL_RULES_CSV.exists():
+        cols = ["rule_id", "plant_type", "season", "activity", "multiplier", "reminder"]
+        return pd.DataFrame(columns=cols)
+
+    df = pd.read_csv(SEASONAL_RULES_CSV)
+    df = df.fillna("")
+
+    # clean up the text columns so matching works properly later
+    for col in ["plant_type", "season", "activity"]:
+        if col in df.columns:
+            df[col] = df[col].map(normalize)
+
+    if "reminder" in df.columns:
+        df["reminder"] = df["reminder"].map(clean_reminder)
+
+    if "multiplier" in df.columns:
+        df["multiplier"] = pd.to_numeric(df["multiplier"], errors="coerce")
+
+    return df
+
+
+SEASONAL_RULES = load_rules()
+
+
+def season_matches(rules, season):
+    season = normalize(season)
+    return rules[rules["season"] == season]
+
+
+def plant_type_matches(rules, plant_type):
+    plant_type = normalize(plant_type)
+
+    matching = rules[rules["plant_type"].isin([plant_type, "", "any"])]
+
+    if plant_type != "":
+        exact_rows = matching[matching["plant_type"] == plant_type]
+        if len(exact_rows) > 0:
+            generic_rows = matching[matching["plant_type"].isin(["", "any"])]
+            return exact_rows, generic_rows
+
+    empty_exact = pd.DataFrame(columns=rules.columns)
+    generic_rows = matching[matching["plant_type"].isin(["", "any"])]
+    return empty_exact, generic_rows
+
+
+def activity_matches(rules, activity):
+    activity = normalize(activity)
+    if activity != "":
+        return rules[rules["activity"].isin([activity, ""])]
+    else:
+        return rules[rules["activity"] == ""]
 
 
 def get_season(value):
@@ -7,65 +76,63 @@ def get_season(value):
         value = date_type.fromisoformat(value)
 
     month = value.month
-    if month in (12, 1, 2):
+
+    if month == 12 or month == 1 or month == 2:
         return "winter"
-    if month in (3, 4, 5):
+    elif month in (3, 4, 5):
         return "spring"
-    if month in (6, 7, 8):
+    elif month in (6, 7, 8):
         return "summer"
-    return "autumn"
+    else:
+        return "autumn"
 
 
 def adjust_frequency_for_season(activity, base_value, plant_type, season):
-    activity = str(activity)
-    plant_type = str(plant_type or "").strip().lower()
-    season = str(season).strip().lower()
+    season_rules = season_matches(SEASONAL_RULES, season)
+    rules = activity_matches(season_rules, activity)
+
+    exact, generic = plant_type_matches(rules, plant_type)
+
+    if not exact.empty:
+        selected = exact
+    else:
+        selected = generic
 
     multiplier = 1.0
+    if not selected.empty and "multiplier" in selected.columns:
+        valid_multipliers = selected["multiplier"].dropna()
+        if len(valid_multipliers) > 0:
+            multiplier = float(valid_multipliers.iloc[0])
 
-    if activity == "watering":
-        if season == "winter":
-            if plant_type in {"cactus", "succulent"}:
-                multiplier = 1.5
-            else:
-                multiplier = 1.2
-        elif season == "summer" and plant_type in {"fern", "tropical"}:
-            multiplier = 0.9
+    adjusted = ceil(float(base_value) * multiplier)
+    if adjusted < 1:
+        adjusted = 1
 
-    if activity == "fertilizing":
-        if season == "winter":
-            multiplier = 2.0
-        elif season in {"spring", "summer"} and plant_type in {"flowering", "tropical", "herb"}:
-            multiplier = 0.75
-
-    adjusted = max(1, ceil(float(base_value) * multiplier))
     return adjusted
 
 
 def get_seasonal_care_reminders(plant_type, season):
-    plant_type = str(plant_type or "").strip().lower()
-    season = str(season).strip().lower()
+    season_rules = season_matches(SEASONAL_RULES, season)
+    no_activity_rules = season_rules[season_rules["activity"] == ""]
+
+    exact, generic = plant_type_matches(no_activity_rules, plant_type)
+    selected = pd.concat([generic, exact], ignore_index=True)
 
     reminders = []
+    if not selected.empty and "reminder" in selected.columns:
+        for r in selected["reminder"].tolist():
+            if r:
+                reminders.append(r)
+        reminders = list(dict.fromkeys(reminders))
 
-    if season == "winter":
-        reminders.append("Reduce fertilizing and watch for slower growth.")
-        if plant_type in {"cactus", "succulent"}:
-            reminders.append("Let the soil dry fully between waterings.")
-        if plant_type in {"tropical", "fern"}:
-            reminders.append("Increase humidity with a tray or humidifier.")
-    elif season == "spring":
-        reminders.append("Resume active feeding as growth picks up.")
-        if plant_type in {"flowering", "herb"}:
-            reminders.append("Support new blooms or foliage with steady light and water.")
-    elif season == "summer":
-        reminders.append("Check moisture more often during hot spells.")
-        if plant_type in {"tropical", "fern"}:
-            reminders.append("Watch for heat stress and keep humidity stable.")
-    else:
-        reminders.append("Prepare for slower growth and reduce feeding gradually.")
+    if len(reminders) > 0:
+        return reminders
 
-    if not reminders:
-        reminders.append("Follow the normal care routine for this plant.")
+    fallback = {
+        "winter": "Reduce fertilizing and watch for slower growth.",
+        "spring": "Resume active feeding as growth picks up.",
+        "summer": "Check moisture more often during hot spells.",
+        "autumn": "Prepare for slower growth and reduce feeding gradually.",
+    }
 
-    return reminders
+    return [fallback.get(normalize(season), "Follow the normal care routine for this plant.")]
