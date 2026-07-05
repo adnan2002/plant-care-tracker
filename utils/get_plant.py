@@ -20,3 +20,5 @@ def get_all_plant_names():
     return plants_df["name"].dropna().unique().tolist()
 
 
+def get_plant_by_name(name):
+    return plants_df.loc[plants_df["name"] == name].iloc[0]

@@ -1,1 +1,2 @@
 plant_id,name,plant_type,location,date_acquired,watering_frequency_days,sunlight_needs,photo_path,fertilizing_weeks,repotting_months,pruning_weeks
+1,Cactus,Cacti,table,2026-07-05,3,Medium,data/uploads/plants/0001/cover.jpg,4,22,12
