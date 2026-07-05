@@ -1,6 +1,6 @@
 import streamlit as st
 
-from utils.get_plant import search_plant
+from utils.plants import search_plant
 
 st.title("Search Plants")
 

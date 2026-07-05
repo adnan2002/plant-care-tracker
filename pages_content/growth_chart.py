@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
 
-from utils.get_plant import get_all_plant_names, get_all_plants, get_plant_by_name
-from utils.load_plants import load_growth
+from utils.plants import get_all_plant_names, get_all_plants, get_plant_by_name
+from utils.storage import load_growth
 
 
 st.title("Growth Chart")

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from utils.load_plants import load_photos, save_photos
+from utils.storage import load_photos, save_photos
 
 
 photos_df = load_photos()

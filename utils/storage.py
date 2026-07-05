@@ -1,4 +1,3 @@
-
 import pandas as pd
 
 PLANTS_CSV = "data/plants.csv"
@@ -22,6 +21,7 @@ problem_df = pd.read_csv(PROBLEM_RULES)
 def load_growth():
     return growth_df.copy()
 
+
 def load_photos():
     return photos_df.copy()
 
@@ -32,7 +32,6 @@ def load_problem_rules():
 
 def load_problems():
     return problem_df.copy()
-
 
 
 def load_plants():
@@ -62,6 +61,7 @@ def save_due_log(df):
     due_log_df = df.copy()
     df.to_csv(DUE_LOG_CSV, index=False)
 
+
 def save_growth(df):
     global growth_df
     growth_df = df.copy()
@@ -78,6 +78,3 @@ def save_problem(df):
     global problem_df
     problem_df = df.copy()
     df.to_csv(PROBLEM_RULES, index=False)
-
-
-

@@ -1,8 +1,8 @@
 import streamlit as st
 from pathlib import Path
 
-from utils.add_plant import add_plant
-from utils.load_plants import plants_df
+from utils.plants import add_plant
+from utils.storage import plants_df
 
 
 st.title("Add Plant")

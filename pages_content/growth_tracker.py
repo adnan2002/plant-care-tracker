@@ -1,7 +1,7 @@
 import streamlit as st
 
 from utils.growth import record_growth_measurement
-from utils.get_plant import get_all_plant_names, get_plant_by_name
+from utils.plants import get_all_plant_names, get_plant_by_name
 
 
 st.title("Growth Tracker")

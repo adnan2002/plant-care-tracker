@@ -2,7 +2,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from utils.get_plant import get_all_plant_names, get_plant_by_name
+from utils.plants import get_all_plant_names, get_plant_by_name
 from utils.photos import add_progress_photo, get_progress_photos, store_uploaded_progress_photo
 
 

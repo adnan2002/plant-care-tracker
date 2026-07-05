@@ -2,7 +2,7 @@ from datetime import date as today_date
 
 import streamlit as st
 
-from utils.get_plant import get_all_plant_names
+from utils.plants import get_all_plant_names
 from utils.care import record_care
 
 st.title("Record Care")

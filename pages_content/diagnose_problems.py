@@ -1,7 +1,7 @@
 import streamlit as st
 
 from utils.diagnosis import diagnose_plant
-from utils.get_plant import get_all_plants, get_plant_by_name
+from utils.plants import get_all_plants, get_plant_by_name
 
 
 st.title("Diagnose Problems")

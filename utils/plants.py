@@ -1,10 +1,32 @@
 import pandas as pd
 
-from utils.load_plants import plants_df, save_plants, load_due_log, save_due_log
-
 from utils.care import add_due_log, get_seasonally_adjusted_schedule
+from utils.storage import plants_df, save_plants, load_due_log, save_due_log
 
 due_log_df = load_due_log()
+
+
+def get_plant(plant_id):
+    return plants_df.loc[plants_df["plant_id"] == plant_id].iloc[0]
+
+
+def get_all_plants():
+    return plants_df
+
+
+def search_plant(query):
+    return plants_df[
+        plants_df['name'].str.contains(query, case=False, na=False) |
+        plants_df['location'].str.contains(query, case=False, na=False)
+    ]
+
+
+def get_all_plant_names():
+    return plants_df["name"].dropna().unique().tolist()
+
+
+def get_plant_by_name(name):
+    return plants_df.loc[plants_df["name"] == name].iloc[0]
 
 
 def add_plant(
@@ -44,7 +66,7 @@ def add_plant(
 
     activities = [
         ("watering",    watering_frequency_days, "days"),
-        ("fertilizing", fertilizing_weeks,        "weeks"),  
+        ("fertilizing", fertilizing_weeks,        "weeks"),
         ("repotting",   repotting_months,         "months"),
         ("pruning",     pruning_weeks,             "weeks"),
     ]
@@ -63,9 +85,5 @@ def add_plant(
             unit=adjusted_unit,
             date_acquired=date_acquired,
         )
-    
+
     save_due_log(due_log_df)
-    
-
-
-    

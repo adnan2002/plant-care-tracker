@@ -5,7 +5,7 @@ from datetime import date as today_date, timedelta, datetime
 
 from dateutil.relativedelta import relativedelta
 
-from utils.load_plants import care_log_df, load_plants, save_care_log, load_due_log, save_due_log
+from utils.storage import care_log_df, load_plants, save_care_log, load_due_log, save_due_log
 from utils.seasons import adjust_frequency_for_season, get_season
 
 due_log_df = load_due_log()

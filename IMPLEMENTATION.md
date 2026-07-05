@@ -8,7 +8,7 @@ Current capabilities:
 
 - `main.py` configures Streamlit navigation for adding plants, recording care, viewing due care, searching plants, and listing all plants.
 - `pages_content/add_plant.py` lets users add a plant, upload one cover photo, and stores the photo path in `data/plants.csv`.
-- `utils/add_plant.py` persists new plant rows and initializes care due dates for watering, fertilizing, repotting, and pruning.
+- `utils/plants.py` persists new plant rows and initializes care due dates for watering, fertilizing, repotting, and pruning.
 - `utils/care.py` computes due dates from fixed plant-level intervals and records completed care in `data/care_log.csv`.
 - `pages_content/due_for_care.py` displays past due and upcoming care from `data/due_log.csv`.
 - `pages_content/search_plants.py` and `pages_content/all_plants.py` expose simple plant lookup/listing.
@@ -85,7 +85,7 @@ Purpose: support seasonal reminders and plant-specific diagnosis rules. Example 
 
 ## Utility Module Changes
 
-### `utils/load_plants.py`
+### `utils/storage.py`
 
 Add constants, cached dataframes, load functions, and save functions for:
 
@@ -207,7 +207,7 @@ Add navigation entries:
 ## Implementation Order
 
 1. Add the new CSV files with headers and add `plant_type` to `plants.csv`.
-2. Extend `utils/load_plants.py` with load/save functions for the new CSV files.
+2. Extend `utils/storage.py` with load/save functions for the new CSV files.
 3. Update add-plant flow to capture and persist `plant_type`.
 4. Implement growth measurement utilities and the growth tracker page.
 5. Implement progress photo utilities and the progress photos page.

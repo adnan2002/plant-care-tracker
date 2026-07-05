@@ -1,7 +1,7 @@
 
 import pandas as pd
 
-from utils.load_plants import load_growth, save_growth
+from utils.storage import load_growth, save_growth
 
 
 growth_df = load_growth()

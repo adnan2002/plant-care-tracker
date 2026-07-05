@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from utils.load_plants import load_problem_rules
+from utils.storage import load_problem_rules
 
 
 SEVERITY_SCORE = {
