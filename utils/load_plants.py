@@ -26,6 +26,10 @@ def load_photos():
     return photos_df.copy()
 
 
+def load_problem_rules():
+    return problem_df.copy()
+
+
 def load_problems():
     return problem_df.copy()
 
@@ -74,7 +78,6 @@ def save_problem(df):
     global problem_df
     problem_df = df.copy()
     df.to_csv(PROBLEM_RULES, index=False)
-
 
 
 

@@ -10,13 +10,16 @@ all_plants_page = st.Page("pages_content/all_plants.py", title="All Plants")
 growth_page = st.Page("pages_content/growth_tracker.py", title="Growth Tracker")
 growth_chart_page = st.Page("pages_content/growth_chart.py", title="Growth Chart")
 progress_photos_page = st.Page("pages_content/progress_photos.py", title="Progress Photos")
+seasonal_reminders_page = st.Page("pages_content/seasonal_reminders.py", title="Seasonal Reminders")
+diagnose_problems_page = st.Page("pages_content/diagnose_problems.py", title="Diagnose Problems")
 
 
 pg = st.navigation(
     {
         "Plants": [add_plant_page, search_plants_page, all_plants_page],
         "Care": [record_care_page, due_for_care_page],
-        "Growth": [growth_page, growth_chart_page, progress_photos_page]
+        "Growth": [growth_page, growth_chart_page, progress_photos_page, seasonal_reminders_page],
+        "Help": [diagnose_problems_page]
     }
 )
 

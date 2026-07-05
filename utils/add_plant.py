@@ -2,7 +2,7 @@ import pandas as pd
 
 from utils.load_plants import plants_df, save_plants, load_due_log, save_due_log
 
-from utils.care import add_due_log
+from utils.care import add_due_log, get_seasonally_adjusted_schedule
 
 due_log_df = load_due_log()
 
@@ -50,12 +50,17 @@ def add_plant(
     ]
 
     for activity, value, unit in activities:
+        adjusted_value, adjusted_unit = get_seasonally_adjusted_schedule(
+            plants_df.loc[plants_df["plant_id"] == next_id].iloc[0],
+            activity,
+            date_acquired,
+        )
         due_log_df = add_due_log(
             due_log_df,
             plant_id=next_id,
             activity=activity,
-            value=value,
-            unit=unit,
+            value=adjusted_value,
+            unit=adjusted_unit,
             date_acquired=date_acquired,
         )
     

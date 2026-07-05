@@ -1,1 +1,13 @@
 rule_id,symptom,problem,recommendation,plant_type,severity
+1,yellow leaves,Overwatering,Reduce watering and check drainage,Tropical,medium
+2,brown tips,Low humidity,Increase humidity and trim damaged tips,Tropical,medium
+3,wilting,Underwatering,Water deeply and monitor soil moisture,,medium
+4,spots,Fungal leaf spot,Remove affected leaves and improve airflow,,medium
+5,pests,Pest infestation,Isolate the plant and treat with insecticidal soap,,high
+6,leggy growth,Insufficient light,Move the plant to brighter indirect light,,medium
+7,root rot smell,Root rot,Remove rotten roots and repot in fresh dry mix,,high
+8,dry soil,Underwatering,Water thoroughly and check the schedule,Cacti,low
+9,shriveled pads,Underwatering,Water sparingly but thoroughly,Cacti,medium
+10,mushy stem,Overwatering,Stop watering and repot into dry soil,Cacti,high
+11,no blooms,Insufficient light,Increase light and feed during the growing season,Flowering,medium
+12,dropping leaves,Environmental stress,Keep conditions stable and avoid sudden moves,,low

@@ -6,6 +6,7 @@ from datetime import date as today_date, timedelta, datetime
 from dateutil.relativedelta import relativedelta
 
 from utils.load_plants import care_log_df, load_plants, save_care_log, load_due_log, save_due_log
+from utils.seasons import adjust_frequency_for_season, get_season
 
 due_log_df = load_due_log()
 
@@ -28,6 +29,14 @@ def get_activity_schedule(plant, activity):
 
     frequency_column, unit = CARE_ACTIVITIES[activity]
     return int(plant[frequency_column]), unit
+
+
+def get_seasonally_adjusted_schedule(plant, activity, reference_date):
+    base_value, unit = get_activity_schedule(plant, activity)
+    season = get_season(reference_date)
+    plant_type = plant.get("plant_type", "")
+    adjusted_value = adjust_frequency_for_season(activity, base_value, unit, plant_type, season)
+    return adjusted_value, unit
 
 
 
@@ -106,7 +115,7 @@ def ensure_due_log_rows(due_log_df, plants_df):
             if exists:
                 continue
 
-            value, unit = get_activity_schedule(plant, activity)
+            value, unit = get_seasonally_adjusted_schedule(plant, activity, plant["date_acquired"])
             due_log_df = add_due_log(
                 due_log_df,
                 plant_id=plant_id,
@@ -130,7 +139,7 @@ def get_due_care_sections():
     plants["plant_id"] = pd.to_numeric(plants["plant_id"], errors="coerce")
 
     due_care = due_logs.merge(
-        plants[["plant_id", "name", "location"]],
+        plants[["plant_id", "name", "location", "plant_type"]],
         on="plant_id",
         how="left",
     )
@@ -159,8 +168,8 @@ def record_care(name, activity, date):
     plant = plants.loc[plants["name"] == name].iloc[0]
     plant_id = int(plant["plant_id"])
     activity = normalize_activity(activity)
-    value, unit = get_activity_schedule(plant, activity)
     care_date = pd.Timestamp(date).date().isoformat()
+    value, unit = get_seasonally_adjusted_schedule(plant, activity, care_date)
 
     updated_due_log = update_due_log(
         load_due_log(),
