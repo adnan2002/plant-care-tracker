@@ -16,8 +16,8 @@ def get_season(value):
     return "autumn"
 
 
-def adjust_frequency_for_season(activity, base_value, unit, plant_type, season):
-    activity = str(activity).strip().lower()
+def adjust_frequency_for_season(activity, base_value, plant_type, season):
+    activity = str(activity)
     plant_type = str(plant_type or "").strip().lower()
     season = str(season).strip().lower()
 

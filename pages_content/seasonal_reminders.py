@@ -10,7 +10,7 @@ from utils.seasons import adjust_frequency_for_season, get_season, get_seasonal_
 
 st.title("Seasonal Reminders")
 
-plants = get_all_plants().copy()
+plants = get_all_plants()
 if plants.empty:
     st.info("Add a plant first.")
     st.stop()

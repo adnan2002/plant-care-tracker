@@ -11,7 +11,7 @@ def get_plant(plant_id):
 
 
 def get_all_plants():
-    return plants_df
+    return plants_df.copy()
 
 
 def search_plant(query):
