@@ -25,7 +25,7 @@ Plant Care Tracker is a Streamlit dashboard for tracking the daily life of your 
 - ⏰ See what is past due and what is coming up next
 - 📈 Log growth measurements over time and compare plants with a line chart
 - 📷 Save progress photos to document change over time
-- 🍂 Get seasonal care reminders based on plant type
+- 🍂 Get seasonal care reminders based on plant type and CSV-backed seasonal rules
 - 🩺 Diagnose common plant problems from symptoms and suggested fixes
 - 🔎 Search plants by name or location
 - 📋 Browse all plants in one table
@@ -72,6 +72,7 @@ This app is powered by CSV files under `data/`:
 - `growth_measurements.csv` - height, width, leaf count, and notes
 - `plant_photos.csv` - progress photo history
 - `plant_problem_rules.csv` - symptom-to-problem diagnosis rules
+- `seasonal_rules.csv` - seasonal care reminders and schedule multipliers by plant type
 
 Uploaded images are stored in `data/uploads/`.
 
@@ -94,8 +95,8 @@ streamlit run main.py
 ## 🧠 How It Works
 
 - The app uses Streamlit for the UI and Pandas for data handling.
-- Plant, care, growth, photo, and diagnosis data are persisted as CSV files.
-- Seasonal logic adjusts watering and fertilizing schedules based on plant type and season.
+- Plant, care, growth, photo, diagnosis, and seasonal data are persisted as CSV files.
+- Seasonal logic adjusts watering and fertilizing schedules based on plant type, season, and `data/seasonal_rules.csv`.
 - Diagnosis rules are data-driven, so the symptom library can grow without rewriting the UI.
 
 ## 🔧 Notes
