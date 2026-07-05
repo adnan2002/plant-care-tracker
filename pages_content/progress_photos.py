@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 
 import streamlit as st
 
@@ -18,14 +18,11 @@ if not names:
 def show_cover_preview(plant_name):
     plant = get_plant_by_name(plant_name)
     cover_value = str(plant.get("photo_path", "")).strip()
-    if cover_value:
-        cover_path = Path(cover_value)
-    else:
-        cover_path = None
+    cover_path = cover_value if cover_value else ""
 
-    if cover_path and cover_path.exists():
+    if cover_path and os.path.exists(cover_path):
         st.caption("Base image")
-        st.image(str(cover_path), width=300)
+        st.image(cover_path, width=300)
     else:
         st.caption("No base image found for this plant.")
 
@@ -51,7 +48,7 @@ if submitted:
         st.error("Upload a photo or enter an existing file path.")
         st.stop()
 
-    if uploaded_photo is None and not Path(file_path).exists():
+    if uploaded_photo is None and not os.path.exists(file_path):
         st.error("The provided file path does not exist.")
         st.stop()
 

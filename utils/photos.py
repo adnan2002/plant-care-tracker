@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 
 import pandas as pd
 
@@ -37,11 +37,13 @@ def get_progress_photos(plant_id):
 
 
 def store_uploaded_progress_photo(plant_id, uploaded_file):
-    progress_dir = Path(f"data/uploads/plants/{plant_id:04d}/progress")
-    progress_dir.mkdir(parents=True, exist_ok=True)
+    progress_dir = f"data/uploads/plants/{plant_id:04d}/progress"
+    os.makedirs(progress_dir, exist_ok=True)
 
-    suffix = Path(uploaded_file.name).suffix or ".jpg"
-    next_number = len(list(progress_dir.iterdir())) + 1
-    destination = progress_dir / f"progress_{next_number:04d}{suffix}"
-    destination.write_bytes(uploaded_file.getvalue())
+    _, ext = os.path.splitext(uploaded_file.name)
+    suffix = ext or ".jpg"
+    next_number = len(os.listdir(progress_dir)) + 1
+    destination = os.path.join(progress_dir, f"progress_{next_number:04d}{suffix}")
+    with open(destination, "wb") as handle:
+        handle.write(uploaded_file.getvalue())
     return str(destination)

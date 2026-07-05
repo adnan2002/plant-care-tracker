@@ -1,5 +1,6 @@
+import os
+
 import streamlit as st
-from pathlib import Path
 
 from utils.plants import add_plant
 from utils.storage import plants_df
@@ -30,13 +31,13 @@ if submitted:
         st.stop()
 
     next_id = 1 if plants_df.empty else int(plants_df["plant_id"].max()) + 1
-    photo_path = ""
-    upload_dir = Path(f"data/uploads/plants/{next_id:04d}")
-    variants_dir = upload_dir / "progress"
-    variants_dir.mkdir(parents=True, exist_ok=True)
-    photo_file = upload_dir / "cover.jpg"
-    photo_file.write_bytes(uploaded_photo.getvalue())
-    photo_path = str(photo_file)
+    upload_dir = f"data/uploads/plants/{next_id:04d}"
+    variants_dir = os.path.join(upload_dir, "progress")
+    os.makedirs(variants_dir, exist_ok=True)
+
+    photo_path = os.path.join(upload_dir, "cover.jpg")
+    with open(photo_path, "wb") as handle:
+        handle.write(uploaded_photo.getvalue())
 
     add_plant(
         name=name,
