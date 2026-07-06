@@ -4,3 +4,10 @@ log_id,plant_id,activity,date
 3,3,watering,2026-07-06
 4,3,repotting,2026-07-06
 5,3,pruning,2026-07-06
+6,5,watering,2026-07-06
+7,1,fertilizing,2026-07-06
+8,1,repotting,2026-07-06
+9,1,fertilizing,2026-07-06
+10,5,fertilizing,2026-07-06
+11,5,repotting,2026-07-06
+12,5,pruning,2026-07-06

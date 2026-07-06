@@ -11,3 +11,11 @@ due_id,plant_id,due_date,activity
 10,3,2026-07-13,fertilizing
 11,3,2026-08-06,repotting
 12,3,2026-07-13,pruning
+13,4,2026-07-13,watering
+14,4,2026-07-13,fertilizing
+15,4,2026-08-06,repotting
+16,4,2026-07-13,pruning
+17,5,2026-07-13,watering
+18,5,2026-07-13,fertilizing
+19,5,2026-08-06,repotting
+20,5,2026-07-13,pruning
