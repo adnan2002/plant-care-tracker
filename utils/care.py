@@ -35,7 +35,7 @@ def get_seasonally_adjusted_schedule(plant, activity, reference_date):
     base_value, unit = get_activity_schedule(plant, activity)
     season = get_season(reference_date)
     plant_type = plant.get("plant_type", "")
-    adjusted_value = adjust_frequency_for_season(activity, base_value, unit, plant_type, season)
+    adjusted_value = adjust_frequency_for_season(activity, base_value, plant_type, season)
     return adjusted_value, unit
 
 

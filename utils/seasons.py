@@ -1,8 +1,9 @@
 from datetime import date as date_type
 from math import ceil
+from pathlib import Path
 import pandas as pd
 
-SEASONAL_RULES_CSV = "data/seasonal_rules.csv"
+SEASONAL_RULES_CSV = Path("data/seasonal_rules.csv")
 
 
 def normalize(value):
