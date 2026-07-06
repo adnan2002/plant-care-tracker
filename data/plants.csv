@@ -1,2 +1,4 @@
 plant_id,name,plant_type,location,date_acquired,watering_frequency_days,sunlight_needs,photo_path,fertilizing_weeks,repotting_months,pruning_weeks
 1,Cactus,Cacti,Table,2026-07-06,7,Low,data/uploads/plants/0001/cover.jpg,1,1,1
+2,Cactus2,Cacti,Floor,2026-07-06,7,Medium,data/uploads/plants/0002/cover.jpg,2,2,1
+3,Sunflower,flower,tbale,2026-05-01,7,Low,data/uploads/plants/0003/cover.jpg,1,1,1

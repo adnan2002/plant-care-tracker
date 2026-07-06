@@ -11,12 +11,12 @@ SEVERITY_SCORE = {
 }
 
 
-def _normalize_text(value):
+def normalize_text(value):
     return str(value or "").strip().lower()
 
 
 def diagnose_plant(symptoms, plant_type=None):
-    selected = {_normalize_text(symptom) for symptom in symptoms if _normalize_text(symptom)}
+    selected = {normalize_text(symptom) for symptom in symptoms if normalize_text(symptom)}
     if not selected:
         return []
 
@@ -30,7 +30,7 @@ def diagnose_plant(symptoms, plant_type=None):
     rules["plant_type"] = rules["plant_type"].fillna("").astype(str).str.strip().str.lower()
     rules["severity"] = rules["severity"].fillna("low").astype(str).str.strip().str.lower()
 
-    plant_type = _normalize_text(plant_type)
+    plant_type = normalize_text(plant_type)
     if plant_type:
         filtered = rules[(rules["plant_type"] == "") | (rules["plant_type"] == plant_type)]
     else:
