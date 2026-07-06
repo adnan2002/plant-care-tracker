@@ -1,1 +1,5 @@
 due_id,plant_id,due_date,activity
+1,1,2026-07-13,watering
+2,1,2026-07-13,fertilizing
+3,1,2026-08-06,repotting
+4,1,2026-07-13,pruning
