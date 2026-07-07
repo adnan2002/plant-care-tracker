@@ -14,6 +14,12 @@
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python badge">
 </p>
 
+<p align="center">
+  <a href="https://general-assembly.streamlit.app/"><strong>🔗 Live App</strong></a>
+  ·
+  <a href="#-video-demo"><strong>🎬 Video Demo</strong></a>
+</p>
+
 ## ✨ What it does
 
 Plant Care Tracker is a Streamlit dashboard for tracking the daily life of your plants. It stores data in CSV files, makes care schedules visible, and adds a little joy to plant maintenance with growth logs, progress photos, and symptom-based diagnosis.
@@ -49,6 +55,18 @@ Plant Care Tracker is a Streamlit dashboard for tracking the daily life of your 
   </tr>
 </table>
 
+## 🎬 Video Demo
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1jfnYyJik0eBgcexYSRIqPJUlwrz8zqsv/view?usp=sharing">
+    <img src="https://drive.google.com/thumbnail?id=1jfnYyJik0eBgcexYSRIqPJUlwrz8zqsv" alt="Watch the Plant Care Tracker demo video" width="720">
+  </a>
+</p>
+
+<p align="center">
+  ▶️ <a href="https://drive.google.com/file/d/1jfnYyJik0eBgcexYSRIqPJUlwrz8zqsv/view?usp=sharing">Watch the full demo on Google Drive</a>
+</p>
+
 ## 🧭 App Pages
 
 - `Add Plant` - create a plant profile and upload a cover image
@@ -77,6 +95,8 @@ This app is powered by CSV files under `data/`:
 Uploaded images are stored in `data/uploads/`.
 
 ## 🚀 Getting Started
+
+> 💡 Want to try it instantly? Check out the **[live app](https://general-assembly.streamlit.app/)** — no install required.
 
 1. Install dependencies:
 
